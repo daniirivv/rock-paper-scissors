@@ -1,10 +1,3 @@
-const rock = "ROCK";
-const paper = "PAPER";
-const scissors = "SCISSORS"
-
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
     const intToChoiceMap = new Map([
         [0, rock],
@@ -16,22 +9,8 @@ function getComputerChoice() {
     return intToChoiceMap.get(choice);
 }
 
-function validInput(input){
-    return (input === rock) || (input === paper) || (input === scissors)
-}
-
 function getHumanChoice() {
-    let correctInput;
-    let input;
-    do {
-        input = String.prototype.toUpperCase(prompt("Make a choice: ", "ROCK || PAPER || SCISSORS"));
-        correctInput = validInput(input);
-        if(correctInput === false){
-            console.log("Only ROCK, PAPER or SCISSORS are valid inputs");
-        }
-    } while (!correctInput);
-
-    return input;
+    return prompt("Make a choice").toUpperCase();
 }
 
 function isWinner(humanChoice, computerChoice){
@@ -51,21 +30,35 @@ function isWinner(humanChoice, computerChoice){
     }
 }
 
-function playRound(humanChoice, computerChoice){
+function playRound(){
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+
     switch (isWinner(humanChoice, computerChoice)) {
         case 1:
-            console.log("You win! " + humanChoice + " beats " + computerChoice);
+            alert("You win! " + humanChoice + " beats " + computerChoice);
             humanScore++;
             break;
         case 0:
-            console.log("It's a tie!");
+            alert("It's a tie!");
             break;
         case -1:
-            console.log("You lose! " + computerChoice + " beats " + humanChoice);
+            alert("You lose! " + computerChoice + " beats " + humanChoice);
             computerScore++;
             break;
         default:
-            console.log("idk what happened :)");
+            alert("idk what happened :)");
             break;
     }
+}
+
+const rock = "ROCK";
+const paper = "PAPER";
+const scissors = "SCISSORS"
+
+let humanScore = 0;
+let computerScore = 0;
+
+for(let i = 0; i < 5; i++){
+    playRound();
 }
